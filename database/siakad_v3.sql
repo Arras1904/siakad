@@ -16,12 +16,10 @@
 
 
 -- Dumping database structure for siakad
-DROP DATABASE IF EXISTS `siakad`;
 CREATE DATABASE IF NOT EXISTS `siakad` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `siakad`;
 
 -- Dumping structure for table siakad.biaya_kuliah
-DROP TABLE IF EXISTS `biaya_kuliah`;
 CREATE TABLE IF NOT EXISTS `biaya_kuliah` (
   `id_biaya` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
   `id_mahasiswa` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -37,9 +35,9 @@ CREATE TABLE IF NOT EXISTS `biaya_kuliah` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table siakad.biaya_kuliah: ~0 rows (approximately)
+DELETE FROM `biaya_kuliah`;
 
 -- Dumping structure for table siakad.bobot_nilai
-DROP TABLE IF EXISTS `bobot_nilai`;
 CREATE TABLE IF NOT EXISTS `bobot_nilai` (
   `nilai_huruf` char(2) COLLATE utf8mb4_unicode_ci NOT NULL,
   `bobot` decimal(3,2) NOT NULL,
@@ -47,7 +45,8 @@ CREATE TABLE IF NOT EXISTS `bobot_nilai` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table siakad.bobot_nilai: ~9 rows (approximately)
-REPLACE INTO `bobot_nilai` (`nilai_huruf`, `bobot`) VALUES
+DELETE FROM `bobot_nilai`;
+INSERT INTO `bobot_nilai` (`nilai_huruf`, `bobot`) VALUES
 	('A', 4.00),
 	('A-', 3.70),
 	('B', 3.00),
@@ -59,7 +58,6 @@ REPLACE INTO `bobot_nilai` (`nilai_huruf`, `bobot`) VALUES
 	('D', 1.00);
 
 -- Dumping structure for table siakad.dosen
-DROP TABLE IF EXISTS `dosen`;
 CREATE TABLE IF NOT EXISTS `dosen` (
   `id_dosen` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
   `id_user` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -80,12 +78,12 @@ CREATE TABLE IF NOT EXISTS `dosen` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table siakad.dosen: ~2 rows (approximately)
-REPLACE INTO `dosen` (`id_dosen`, `id_user`, `nip`, `jk`, `email`, `telepon`, `alamat`, `id_prodi`, `agama`, `profil_lengkap`) VALUES
+DELETE FROM `dosen`;
+INSERT INTO `dosen` (`id_dosen`, `id_user`, `nip`, `jk`, `email`, `telepon`, `alamat`, `id_prodi`, `agama`, `profil_lengkap`) VALUES
 	('555f9bb1-e568-4a64-b81c-8cccf1964778', '93079986-8d9d-4fa6-98fd-8597513c6aef', '202343502269', 'L', 'Arrasyid1904@gmail.com', '087887448092', 'Jl. Hebat', '5a282315-8f05-498b-8227-2ead70c2cd5c', 'Islam', 1),
 	('7da6c19b-10a8-4936-84d8-ce8ac0bda3c0', '97f80433-6935-4c58-9b19-fdea3995fd86', '1234567890', 'L', 'budi@kampus.ac.id', NULL, NULL, '5a282315-8f05-498b-8227-2ead70c2cd5c', NULL, 1);
 
 -- Dumping structure for table siakad.kelas
-DROP TABLE IF EXISTS `kelas`;
 CREATE TABLE IF NOT EXISTS `kelas` (
   `id_kelas` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
   `id_prodi` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -96,13 +94,13 @@ CREATE TABLE IF NOT EXISTS `kelas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table siakad.kelas: ~3 rows (approximately)
-REPLACE INTO `kelas` (`id_kelas`, `id_prodi`, `nama_kelas`) VALUES
+DELETE FROM `kelas`;
+INSERT INTO `kelas` (`id_kelas`, `id_prodi`, `nama_kelas`) VALUES
 	('6dd2c7df-ab21-4eba-9500-7d7bf635619e', '5a282315-8f05-498b-8227-2ead70c2cd5c', 'TI-A'),
 	('9c07b776-af52-459b-b13c-7e1388276802', '9fe8b17b-9784-4eec-b2f6-b04573d4bd8f', 'SI-A'),
 	('d6ee0084-8acd-4631-95e4-1f790d111dde', 'a5999e91-d755-41ac-815f-3b61b8145b02', 'ILKOM-A');
 
 -- Dumping structure for table siakad.kelas_perkuliahan
-DROP TABLE IF EXISTS `kelas_perkuliahan`;
 CREATE TABLE IF NOT EXISTS `kelas_perkuliahan` (
   `id_kelas_perkuliahan` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
   `id_matkul` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -125,11 +123,11 @@ CREATE TABLE IF NOT EXISTS `kelas_perkuliahan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table siakad.kelas_perkuliahan: ~1 rows (approximately)
-REPLACE INTO `kelas_perkuliahan` (`id_kelas_perkuliahan`, `id_matkul`, `id_dosen`, `id_kelas`, `id_periode`, `hari`, `jam_mulai`, `jam_selesai`, `ruangan`) VALUES
+DELETE FROM `kelas_perkuliahan`;
+INSERT INTO `kelas_perkuliahan` (`id_kelas_perkuliahan`, `id_matkul`, `id_dosen`, `id_kelas`, `id_periode`, `hari`, `jam_mulai`, `jam_selesai`, `ruangan`) VALUES
 	('3491cf40-6b80-4ff6-8e5c-d52b237a9276', '9ae8abfd-33ce-4e54-b1e1-3ac2b811738c', '555f9bb1-e568-4a64-b81c-8cccf1964778', '6dd2c7df-ab21-4eba-9500-7d7bf635619e', '754d1d8c-65b5-44a6-a9d1-847a1a613edf', 'Kamis', '14:30:00', '17:00:00', '5.2.7');
 
 -- Dumping structure for table siakad.mahasiswa
-DROP TABLE IF EXISTS `mahasiswa`;
 CREATE TABLE IF NOT EXISTS `mahasiswa` (
   `id_mahasiswa` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
   `id_user` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -158,12 +156,12 @@ CREATE TABLE IF NOT EXISTS `mahasiswa` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table siakad.mahasiswa: ~2 rows (approximately)
-REPLACE INTO `mahasiswa` (`id_mahasiswa`, `id_user`, `npm`, `jk`, `tempat_lahir`, `tanggal_lahir`, `alamat`, `email`, `telepon`, `angkatan`, `id_prodi`, `id_kelas`, `semester`, `status_akademik`, `agama`, `profil_lengkap`) VALUES
+DELETE FROM `mahasiswa`;
+INSERT INTO `mahasiswa` (`id_mahasiswa`, `id_user`, `npm`, `jk`, `tempat_lahir`, `tanggal_lahir`, `alamat`, `email`, `telepon`, `angkatan`, `id_prodi`, `id_kelas`, `semester`, `status_akademik`, `agama`, `profil_lengkap`) VALUES
 	('99ba4463-1622-4f58-b932-077a39331014', '2c5427ce-18aa-4f6a-ba25-33f025236c69', '202343502262', 'L', 'Jakarta', '2005-06-06', 'Jl. Jati', 'andra@gmail.com', '082124793703', '2023', '5a282315-8f05-498b-8227-2ead70c2cd5c', '6dd2c7df-ab21-4eba-9500-7d7bf635619e', 1, 'aktif', 'Islam', 1),
 	('c58420e9-8422-4fac-a08f-f0d6feb1b12e', '2f9347d4-09bc-4d7c-b997-0cef14618c6c', '20260001', 'L', NULL, NULL, NULL, 'andi@kampus.ac.id', NULL, '2026', '5a282315-8f05-498b-8227-2ead70c2cd5c', '6dd2c7df-ab21-4eba-9500-7d7bf635619e', 1, 'aktif', NULL, 1);
 
 -- Dumping structure for table siakad.mata_kuliah
-DROP TABLE IF EXISTS `mata_kuliah`;
 CREATE TABLE IF NOT EXISTS `mata_kuliah` (
   `id_matkul` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
   `id_prodi` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -177,14 +175,14 @@ CREATE TABLE IF NOT EXISTS `mata_kuliah` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table siakad.mata_kuliah: ~4 rows (approximately)
-REPLACE INTO `mata_kuliah` (`id_matkul`, `id_prodi`, `kode_matkul`, `nama_matkul`, `sks`) VALUES
+DELETE FROM `mata_kuliah`;
+INSERT INTO `mata_kuliah` (`id_matkul`, `id_prodi`, `kode_matkul`, `nama_matkul`, `sks`) VALUES
 	('85c71378-1406-4add-ac46-bd95412a582e', '5a282315-8f05-498b-8227-2ead70c2cd5c', 'MK001', 'Algoritma', 3),
 	('9ae8abfd-33ce-4e54-b1e1-3ac2b811738c', '5a282315-8f05-498b-8227-2ead70c2cd5c', 'PWL', 'Pemrograman Web Lanjut', 3),
 	('c5bd6fca-baa4-49f4-9a0f-95d2d8b125fa', '9fe8b17b-9784-4eec-b2f6-b04573d4bd8f', 'MK003', 'Sistem Informasi Manajemen', 3),
 	('f839b4fd-7359-4f17-b35a-664ae741f935', '5a282315-8f05-498b-8227-2ead70c2cd5c', 'MK002', 'Basis Data', 3);
 
 -- Dumping structure for table siakad.nilai
-DROP TABLE IF EXISTS `nilai`;
 CREATE TABLE IF NOT EXISTS `nilai` (
   `id_nilai` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
   `id_peserta_kelas` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -199,12 +197,12 @@ CREATE TABLE IF NOT EXISTS `nilai` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table siakad.nilai: ~2 rows (approximately)
-REPLACE INTO `nilai` (`id_nilai`, `id_peserta_kelas`, `tugas`, `uts`, `uas`, `nilai_akhir`, `nilai_huruf`) VALUES
+DELETE FROM `nilai`;
+INSERT INTO `nilai` (`id_nilai`, `id_peserta_kelas`, `tugas`, `uts`, `uas`, `nilai_akhir`, `nilai_huruf`) VALUES
 	('2673aa2e-ebaf-432f-b8d8-8641e69c6b73', '54aa30bf-a258-4098-963c-97388c28c812', 90.00, 80.00, 85.00, 84.50, 'A-'),
 	('b8169676-2196-41b7-930d-df16591ac249', '20bcf426-34c0-4dd5-bb37-323e50757300', 30.00, 30.00, 30.00, 30.00, 'D');
 
 -- Dumping structure for table siakad.pengaturan
-DROP TABLE IF EXISTS `pengaturan`;
 CREATE TABLE IF NOT EXISTS `pengaturan` (
   `key` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `value` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -212,11 +210,11 @@ CREATE TABLE IF NOT EXISTS `pengaturan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table siakad.pengaturan: ~1 rows (approximately)
-REPLACE INTO `pengaturan` (`key`, `value`) VALUES
+DELETE FROM `pengaturan`;
+INSERT INTO `pengaturan` (`key`, `value`) VALUES
 	('biaya_kuliah_default', '1600000');
 
 -- Dumping structure for table siakad.periode_akademik
-DROP TABLE IF EXISTS `periode_akademik`;
 CREATE TABLE IF NOT EXISTS `periode_akademik` (
   `id_periode` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
   `nama_periode` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -228,11 +226,11 @@ CREATE TABLE IF NOT EXISTS `periode_akademik` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table siakad.periode_akademik: ~1 rows (approximately)
-REPLACE INTO `periode_akademik` (`id_periode`, `nama_periode`, `jenis_semester`, `tanggal_mulai`, `tanggal_selesai`, `status`) VALUES
+DELETE FROM `periode_akademik`;
+INSERT INTO `periode_akademik` (`id_periode`, `nama_periode`, `jenis_semester`, `tanggal_mulai`, `tanggal_selesai`, `status`) VALUES
 	('754d1d8c-65b5-44a6-a9d1-847a1a613edf', '2026/2027', 'Ganjil', '2026-08-01', '2027-01-31', 'aktif');
 
 -- Dumping structure for table siakad.peserta_kelas
-DROP TABLE IF EXISTS `peserta_kelas`;
 CREATE TABLE IF NOT EXISTS `peserta_kelas` (
   `id_peserta_kelas` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
   `id_kelas_perkuliahan` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -246,12 +244,12 @@ CREATE TABLE IF NOT EXISTS `peserta_kelas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table siakad.peserta_kelas: ~2 rows (approximately)
-REPLACE INTO `peserta_kelas` (`id_peserta_kelas`, `id_kelas_perkuliahan`, `id_mahasiswa`, `created_at`) VALUES
+DELETE FROM `peserta_kelas`;
+INSERT INTO `peserta_kelas` (`id_peserta_kelas`, `id_kelas_perkuliahan`, `id_mahasiswa`, `created_at`) VALUES
 	('20bcf426-34c0-4dd5-bb37-323e50757300', '3491cf40-6b80-4ff6-8e5c-d52b237a9276', 'c58420e9-8422-4fac-a08f-f0d6feb1b12e', '2026-07-05 14:51:43'),
 	('54aa30bf-a258-4098-963c-97388c28c812', '3491cf40-6b80-4ff6-8e5c-d52b237a9276', '99ba4463-1622-4f58-b932-077a39331014', '2026-07-05 14:51:43');
 
 -- Dumping structure for table siakad.prodi
-DROP TABLE IF EXISTS `prodi`;
 CREATE TABLE IF NOT EXISTS `prodi` (
   `id_prodi` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
   `kode_prodi` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -261,13 +259,13 @@ CREATE TABLE IF NOT EXISTS `prodi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table siakad.prodi: ~3 rows (approximately)
-REPLACE INTO `prodi` (`id_prodi`, `kode_prodi`, `nama_prodi`) VALUES
+DELETE FROM `prodi`;
+INSERT INTO `prodi` (`id_prodi`, `kode_prodi`, `nama_prodi`) VALUES
 	('5a282315-8f05-498b-8227-2ead70c2cd5c', 'TI', 'Teknik Informatika'),
 	('9fe8b17b-9784-4eec-b2f6-b04573d4bd8f', 'SI', 'Sistem Informasi'),
 	('a5999e91-d755-41ac-815f-3b61b8145b02', 'ILKOM', 'Ilmu Komunikasi');
 
 -- Dumping structure for table siakad.users
-DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
   `id_user` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
   `username` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -283,7 +281,8 @@ CREATE TABLE IF NOT EXISTS `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Dumping data for table siakad.users: ~5 rows (approximately)
-REPLACE INTO `users` (`id_user`, `username`, `password_hash`, `nama_lengkap`, `foto`, `role`, `status`, `last_login`, `created_at`) VALUES
+DELETE FROM `users`;
+INSERT INTO `users` (`id_user`, `username`, `password_hash`, `nama_lengkap`, `foto`, `role`, `status`, `last_login`, `created_at`) VALUES
 	('2c5427ce-18aa-4f6a-ba25-33f025236c69', '202343502262', '$2y$10$1e7FomHC6a8i5LBKM02vr.WztqavRcx.Ml8FRRsKI3fhAeLe7l87u', 'Andra Kurnia Cahya', 'default-user.png', 'mahasiswa', 'aktif', '2026-07-05 23:00:01', '2026-07-05 14:47:28'),
 	('2f9347d4-09bc-4d7c-b997-0cef14618c6c', '20260001', '$2y$10$FkTMOFeGB0m5d8jJkGVLfuoS8kvdXxfCmXWJA.RsaxeXCkI70jyCi', 'Andi Mahasiswa', 'default-user.png', 'mahasiswa', 'aktif', '2026-07-05 21:58:04', '2026-07-05 14:36:00'),
 	('93079986-8d9d-4fa6-98fd-8597513c6aef', '202343502269', '$2y$10$jwYyV8jCmCuFCIJYmmrndOaeIt8ilkCeoZHs9ARO3cjJonLcUayh6', 'Muhammad Arrasyid', '6a4a7e2485a2d.png', 'dosen', 'aktif', '2026-07-05 22:59:26', '2026-07-05 14:46:26'),
