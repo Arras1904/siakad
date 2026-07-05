@@ -1,0 +1,271 @@
+/* ==========================================
+   TABLE CSS
+   Sistem Informasi Akademik
+========================================== */
+
+/* ==========================
+   CONTAINER TABLE
+========================== */
+
+.table-container{
+    background:#ffffff;
+    border-radius:16px;
+    padding:20px;
+    box-shadow:0 5px 20px rgba(0,0,0,.08);
+    overflow-x:auto;
+}
+
+
+/* ==========================
+   HEADER TABLE
+========================== */
+
+.table-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+    flex-wrap:wrap;
+    gap:15px;
+}
+
+.table-header h3{
+    font-size:22px;
+    font-weight:600;
+    color:#1e293b;
+}
+
+
+/* ==========================
+   SEARCH
+========================== */
+
+.table-search{
+    width:300px;
+    max-width:100%;
+    position:relative;
+}
+
+.table-search input{
+    width:100%;
+    padding:11px 15px 11px 45px;
+    border:1px solid #d1d5db;
+    border-radius:10px;
+    outline:none;
+    transition:.3s;
+}
+
+.table-search input:focus{
+    border-color:#2563eb;
+    box-shadow:0 0 10px rgba(37,99,235,.2);
+}
+
+.table-search i{
+    position:absolute;
+    left:15px;
+    top:13px;
+    color:#94a3b8;
+}
+
+
+/* ==========================
+   TABLE
+========================== */
+
+.table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:900px;
+}
+
+.table thead{
+    background:#2563eb;
+    color:#ffffff;
+}
+
+.table thead th{
+    padding:15px;
+    text-align:left;
+    font-weight:600;
+    white-space:nowrap;
+}
+
+.table tbody td{
+    padding:14px;
+    border-bottom:1px solid #e5e7eb;
+    color:#475569;
+    vertical-align:middle;
+}
+
+.table tbody tr{
+    transition:.2s;
+}
+
+.table tbody tr:hover{
+    background:#eff6ff;
+}
+
+
+/* ==========================
+   FOTO
+========================== */
+
+.table-photo{
+    width:45px;
+    height:45px;
+    border-radius:50%;
+    object-fit:cover;
+}
+
+
+/* ==========================
+   STATUS
+========================== */
+
+.status{
+    display:inline-block;
+    padding:6px 12px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:600;
+}
+
+.status-active{
+    background:#dcfce7;
+    color:#15803d;
+}
+
+.status-nonaktif{
+    background:#fee2e2;
+    color:#b91c1c;
+}
+
+.status-warning{
+    background:#fef3c7;
+    color:#b45309;
+}
+
+
+/* ==========================
+   BUTTON AKSI
+========================== */
+
+.action{
+    display:flex;
+    gap:8px;
+}
+
+.btn-edit{
+    background:#3b82f6;
+    color:white;
+    border:none;
+    border-radius:8px;
+    padding:8px 12px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.btn-edit:hover{
+    background:#2563eb;
+}
+
+.btn-delete{
+    background:#ef4444;
+    color:white;
+    border:none;
+    border-radius:8px;
+    padding:8px 12px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.btn-delete:hover{
+    background:#dc2626;
+}
+
+.btn-detail{
+    background:#10b981;
+    color:white;
+    border:none;
+    border-radius:8px;
+    padding:8px 12px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.btn-detail:hover{
+    background:#059669;
+}
+
+
+/* ==========================
+   PAGINATION
+========================== */
+
+.pagination{
+    margin-top:25px;
+    display:flex;
+    justify-content:flex-end;
+    gap:8px;
+}
+
+.pagination a{
+    width:38px;
+    height:38px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:8px;
+    background:#ffffff;
+    color:#475569;
+    border:1px solid #d1d5db;
+    transition:.3s;
+}
+
+.pagination a:hover{
+    background:#2563eb;
+    color:#ffffff;
+}
+
+.pagination .active{
+    background:#2563eb;
+    color:#ffffff;
+}
+
+
+/* ==========================
+   DATA KOSONG
+========================== */
+
+.empty-data{
+    text-align:center;
+    padding:40px 20px;
+    color:#94a3b8;
+}
+
+.empty-data i{
+    font-size:60px;
+    margin-bottom:15px;
+}
+
+
+/* ==========================
+   RESPONSIVE
+========================== */
+
+@media(max-width:768px){
+
+    .table-header{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .table-search{
+        width:100%;
+    }
+
+    .action{
+        flex-direction:column;
+    }
+
+}

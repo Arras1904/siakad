@@ -1,0 +1,317 @@
+/* =====================================================
+   DASHBOARD
+===================================================== */
+
+#dashboard-page{
+    width:100%;
+    animation:fadeIn .5s ease;
+}
+
+.dashboard-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:30px;
+}
+
+.dashboard-header h1{
+    font-size:32px;
+    color:#1e293b;
+    font-weight:700;
+    margin-bottom:8px;
+}
+
+.dashboard-header p{
+    color:#64748b;
+    font-size:15px;
+}
+
+
+/* =====================================================
+   GRID CARD
+===================================================== */
+
+.card-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
+    gap:20px;
+
+    margin-bottom:30px;
+
+}
+
+
+/* =====================================================
+   CARD
+===================================================== */
+
+.card{
+
+    position:relative;
+
+    background:#ffffff;
+
+    border-radius:18px;
+
+    padding:25px;
+
+    overflow:hidden;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+    transition:.3s;
+
+    cursor:pointer;
+
+}
+
+.card:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:0 20px 40px rgba(0,0,0,.15);
+
+}
+
+.card i{
+
+    font-size:42px;
+
+    color:#fff;
+
+    width:75px;
+
+    height:75px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    margin-bottom:20px;
+
+}
+
+.card h2{
+
+    font-size:34px;
+
+    color:#1e293b;
+
+    margin-bottom:5px;
+
+    font-weight:bold;
+
+}
+
+.card p{
+
+    color:#64748b;
+
+    font-size:16px;
+
+}
+
+
+/* =====================================================
+   WARNA CARD
+===================================================== */
+
+.blue i{
+    background:#2563eb;
+}
+
+.green i{
+    background:#16a34a;
+}
+
+.orange i{
+    background:#ea580c;
+}
+
+.purple i{
+    background:#7c3aed;
+}
+
+.cyan i{
+    background:#0891b2;
+}
+
+.red i{
+    background:#dc2626;
+}
+
+.yellow i{
+    background:#ca8a04;
+}
+
+.dark i{
+    background:#334155;
+}
+
+
+/* =====================================================
+   DASHBOARD ROW
+===================================================== */
+
+.dashboard-row{
+
+    display:grid;
+
+    grid-template-columns:2fr 1fr;
+
+    gap:20px;
+
+}
+
+
+/* =====================================================
+   BOX
+===================================================== */
+
+.dashboard-box{
+
+    background:#fff;
+
+    border-radius:20px;
+
+    padding:25px;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+}
+
+.dashboard-box h3{
+
+    margin-bottom:20px;
+
+    color:#1e293b;
+
+}
+
+
+/* =====================================================
+   INFORMASI
+===================================================== */
+
+.dashboard-info{
+
+    list-style:none;
+
+}
+
+.dashboard-info li{
+
+    padding:15px;
+
+    margin-bottom:10px;
+
+    border-radius:12px;
+
+    background:#f8fafc;
+
+    color:#475569;
+
+    transition:.3s;
+
+}
+
+.dashboard-info li:hover{
+
+    background:#2563eb;
+
+    color:#fff;
+
+}
+
+
+/* =====================================================
+   CANVAS
+===================================================== */
+
+canvas{
+
+    width:100%!important;
+
+    height:350px!important;
+
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media(max-width:1200px){
+
+.card-grid{
+
+grid-template-columns:repeat(2,1fr);
+
+}
+
+.dashboard-row{
+
+grid-template-columns:1fr;
+
+}
+
+}
+
+
+@media(max-width:768px){
+
+.card-grid{
+
+grid-template-columns:1fr;
+
+}
+
+.dashboard-header{
+
+flex-direction:column;
+
+align-items:flex-start;
+
+gap:15px;
+
+}
+
+.dashboard-header h1{
+
+font-size:26px;
+
+}
+
+}
+
+
+/* =====================================================
+   ANIMATION
+===================================================== */
+
+@keyframes fadeIn{
+
+from{
+
+opacity:0;
+
+transform:translateY(20px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+}
