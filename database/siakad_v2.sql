@@ -61,6 +61,7 @@ CREATE TABLE `dosen` (
   `telepon` VARCHAR(20),
   `alamat` TEXT,
   `id_prodi` CHAR(36) NOT NULL,
+  `agama` ENUM('Islam', 'Kristen', 'Katolik', 'Hindu', 'Buddha', 'Konghucu', 'Lainnya') NULL,
   `profil_lengkap` BOOLEAN DEFAULT 0,
   FOREIGN KEY (`id_user`) REFERENCES `users`(`id_user`) ON DELETE CASCADE,
   FOREIGN KEY (`id_prodi`) REFERENCES `prodi`(`id_prodi`) ON DELETE CASCADE
@@ -82,6 +83,7 @@ CREATE TABLE `mahasiswa` (
   `id_kelas` CHAR(36) NOT NULL,
   `semester` INT DEFAULT 1,
   `status_akademik` ENUM('aktif','cuti','lulus','dropout') DEFAULT 'aktif',
+  `agama` ENUM('Islam', 'Kristen', 'Katolik', 'Hindu', 'Buddha', 'Konghucu', 'Lainnya') NULL,
   `profil_lengkap` BOOLEAN DEFAULT 0,
   FOREIGN KEY (`id_user`) REFERENCES `users`(`id_user`) ON DELETE CASCADE,
   FOREIGN KEY (`id_prodi`) REFERENCES `prodi`(`id_prodi`) ON DELETE CASCADE,
@@ -184,9 +186,12 @@ INSERT INTO kelas (id_kelas, id_prodi, nama_kelas) VALUES
 ('9c07b776-af52-459b-b13c-7e1388276802', '9fe8b17b-9784-4eec-b2f6-b04573d4bd8f', 'SI-A');
 
 INSERT INTO users (id_user, username, password_hash, nama_lengkap, role, status) VALUES 
-('cbc36218-bdb2-4972-8038-5899b892160b', 'admin', '$2y$10$xzxyWyp7tWmCdxrFrLCnW.IfWNO.uPlZ2FUULd1uBpClNnHtQ/mzS', 'Administrator', 'admin', 'aktif'),
-('97f80433-6935-4c58-9b19-fdea3995fd86', '1234567890', '$2y$10$VWXfAU.W0dBGC.xql8R7Q.lFvMdOhfkjxCSrinkwdDwfRta2Utjku', 'Budi Dosen', 'dosen', 'aktif'),
-('2f9347d4-09bc-4d7c-b997-0cef14618c6c', '20260001', '$2y$10$3ke4nVwZvyv6FanLhpIm2eSb6bG420d6mILIhVV8O.ERStIfuIXB6', 'Andi Mahasiswa', 'mahasiswa', 'aktif');
+/* Password: admin123 */
+('cbc36218-bdb2-4972-8038-5899b892160b', 'admin', '$2y$10$.zIHYme/Ci7F9pW59fNFA.UlGaETMUU/U3v.V8qKLxjq2ZD5tT1ca', 'Administrator', 'admin', 'aktif'),
+/* Password: 1234567890 */
+('97f80433-6935-4c58-9b19-fdea3995fd86', '1234567890', '$2y$10$VyfPSILQ3yrZVGTkODwdPuXQRkCZXHowCpI52YE9tqJaa8y0d7LOu', 'Budi Dosen', 'dosen', 'aktif'),
+/* Password: 20260001 */
+('2f9347d4-09bc-4d7c-b997-0cef14618c6c', '20260001', '$2y$10$FkTMOFeGB0m5d8jJkGVLfuoS8kvdXxfCmXWJA.RsaxeXCkI70jyCi', 'Andi Mahasiswa', 'mahasiswa', 'aktif');
 
 INSERT INTO dosen (id_dosen, id_user, nip, jk, email, id_prodi, profil_lengkap) VALUES 
 ('7da6c19b-10a8-4936-84d8-ce8ac0bda3c0', '97f80433-6935-4c58-9b19-fdea3995fd86', '1234567890', 'L', 'budi@kampus.ac.id', '5a282315-8f05-498b-8227-2ead70c2cd5c', 1);

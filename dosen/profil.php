@@ -37,12 +37,25 @@ $dosen = $stmt->fetch();
         <div class="bg-red-100 text-red-700 p-3 rounded mb-4"><?= $_SESSION['error']; unset($_SESSION['error']); ?></div>
     <?php endif; ?>
 
-    <form action="proses_profil.php" method="POST" class="bg-white p-6 rounded shadow max-w-lg">
+    <form action="proses_profil.php" method="POST" enctype="multipart/form-data" class="bg-white p-6 rounded shadow max-w-lg">
         <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
         
         <div class="mb-4">
             <label class="block text-gray-700 mb-2">Nama Lengkap</label>
             <input type="text" name="nama_lengkap" class="w-full border p-2 rounded" value="<?= htmlspecialchars($dosen['nama_lengkap']) ?>" required>
+        </div>
+        <div class="mb-4">
+            <label class="block text-gray-700 mb-2">Foto Profil (opsional)</label>
+            <div class="flex items-center gap-4">
+                <div id="icon-preview-profil" class="<?= !empty($dosen['foto']) ? 'hidden' : 'flex' ?> w-16 h-16 rounded-full bg-gray-200 text-gray-500 items-center justify-center border border-gray-300 shadow-sm">
+                    <i class="fa-solid fa-user text-3xl"></i>
+                </div>
+                <img id="preview-foto-profil" src="<?= !empty($dosen['foto']) ? BASE_URL.'assets/images/'.$dosen['foto'] : '' ?>" alt="Preview" class="<?= empty($dosen['foto']) ? 'hidden' : 'block' ?> w-16 h-16 rounded-full object-cover border border-gray-300 shadow-sm">
+                <div class="flex-1">
+                    <input type="file" name="foto" accept="image/png, image/jpeg, image/webp" class="w-full border p-2 rounded bg-white text-sm" onchange="document.getElementById('icon-preview-profil').classList.add('hidden'); document.getElementById('preview-foto-profil').classList.remove('hidden'); document.getElementById('preview-foto-profil').classList.add('block'); document.getElementById('preview-foto-profil').src = window.URL.createObjectURL(this.files[0])">
+                    <small class="text-gray-500 block mt-1">Format: JPG, PNG, WEBP.</small>
+                </div>
+            </div>
         </div>
         <div class="mb-4">
             <label class="block text-gray-700 mb-2">NIP</label>
@@ -53,6 +66,18 @@ $dosen = $stmt->fetch();
             <select name="jk" class="w-full border p-2 rounded" required>
                 <option value="L" <?= $dosen['jk']=='L'?'selected':'' ?>>Laki-laki</option>
                 <option value="P" <?= $dosen['jk']=='P'?'selected':'' ?>>Perempuan</option>
+            </select>
+        </div>
+        <div class="mb-4">
+            <label class="block text-gray-700 mb-2">Agama</label>
+            <select name="agama" class="w-full border p-2 rounded" required>
+                <?php 
+                $agamaOpt = ['Islam', 'Kristen', 'Katolik', 'Hindu', 'Buddha', 'Konghucu', 'Lainnya'];
+                foreach($agamaOpt as $ag) {
+                    $sel = ($dosen['agama'] == $ag) ? 'selected' : '';
+                    echo "<option value=\"$ag\" $sel>$ag</option>";
+                }
+                ?>
             </select>
         </div>
         <div class="mb-4">

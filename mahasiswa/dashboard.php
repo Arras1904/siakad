@@ -22,7 +22,7 @@ $id_periode_aktif = $periodeAktif['id_periode'] ?? null;
 // Calculate Total SKS and IPK
 // IPK = SUM(SKS * Bobot) / SUM(SKS)
 $qStats = $pdo->prepare("
-    SELECT m.sks, b.bobot, b.lulus 
+    SELECT m.sks, b.bobot 
     FROM nilai n
     JOIN peserta_kelas pk ON n.id_peserta_kelas = pk.id_peserta_kelas
     JOIN kelas_perkuliahan kp ON pk.id_kelas_perkuliahan = kp.id_kelas_perkuliahan
@@ -44,7 +44,7 @@ foreach ($semuaNilai as $n) {
     $totalSksDiambil += $sks;
     $totalMutu += ($sks * $bobot);
     
-    if ($n['lulus'] == 1) {
+    if ($bobot > 0) {
         $totalSksLulus += $sks;
     }
 }
@@ -89,6 +89,104 @@ foreach ($dataIpsRaw as $row) {
 }
 
 ?>
+<?php if(isset($_SESSION['profil_lengkap']) && $_SESSION['profil_lengkap'] == 0): 
+    $stmtF = $pdo->prepare("
+        SELECT u.nama_lengkap, m.*, p.nama_prodi, k.nama_kelas 
+        FROM users u 
+        JOIN mahasiswa m ON u.id_user = m.id_user 
+        JOIN prodi p ON m.id_prodi = p.id_prodi
+        JOIN kelas k ON m.id_kelas = k.id_kelas
+        WHERE u.id_user = ?
+    ");
+    $stmtF->execute([$id_user]);
+    $mhsData = $stmtF->fetch();
+    if (!isset($_SESSION['csrf_token'])) $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+?>
+<div class="p-6">
+    <div class="bg-white rounded-xl shadow-md p-6 border-t-4 border-red-500">
+        <h2 class="text-2xl font-bold mb-2 text-red-600"><i class="fa-solid fa-triangle-exclamation"></i> Lengkapi Biodata Anda</h2>
+        <p class="text-gray-600 mb-4">Anda harus melengkapi formulir ini sebelum dapat menggunakan Sistem Informasi Akademik.</p>
+        
+        <?php if(isset($_SESSION['error'])): ?>
+            <div class="bg-red-100 text-red-700 p-3 rounded mb-4"><?= $_SESSION['error']; unset($_SESSION['error']); ?></div>
+        <?php endif; ?>
+
+        <form action="proses_biodata.php" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
+            
+            <div class="grid grid-cols-2 gap-4 mb-4 bg-gray-50 p-4 rounded border">
+                <div><span class="text-sm text-gray-500">NPM</span><br><strong><?= htmlspecialchars($mhsData['npm']) ?></strong></div>
+                <div><span class="text-sm text-gray-500">Prodi</span><br><strong><?= htmlspecialchars($mhsData['nama_prodi']) ?></strong></div>
+                <div><span class="text-sm text-gray-500">Kelas</span><br><strong><?= htmlspecialchars($mhsData['nama_kelas']) ?></strong></div>
+                <div><span class="text-sm text-gray-500">Angkatan</span><br><strong><?= htmlspecialchars($mhsData['angkatan']) ?></strong></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="mb-2">
+                    <label class="block text-gray-700 text-sm mb-1">Nama Lengkap</label>
+                    <input type="text" name="nama_lengkap" class="w-full border p-2 rounded" value="<?= htmlspecialchars($mhsData['nama_lengkap']) ?>" required>
+                </div>
+                <div class="mb-2">
+                    <label class="block text-gray-700 text-sm mb-1">Foto Profil (opsional)</label>
+                    <div class="flex items-center gap-3">
+                        <div id="icon-preview-mhs-dash" class="<?= !empty($mhsData['foto']) ? 'hidden' : 'flex' ?> w-12 h-12 rounded-full bg-gray-200 text-gray-500 items-center justify-center border border-gray-300 shadow-sm">
+                            <i class="fa-solid fa-user text-xl"></i>
+                        </div>
+                        <img id="preview-foto-mhs-dash" src="<?= !empty($mhsData['foto']) ? BASE_URL.'assets/images/'.$mhsData['foto'] : '' ?>" alt="Preview" class="<?= empty($mhsData['foto']) ? 'hidden' : 'block' ?> w-12 h-12 rounded-full object-cover border border-gray-300 shadow-sm">
+                        <input type="file" name="foto" accept="image/png, image/jpeg, image/webp" class="w-full border p-2 rounded bg-white text-sm" onchange="document.getElementById('icon-preview-mhs-dash').classList.add('hidden'); document.getElementById('preview-foto-mhs-dash').classList.remove('hidden'); document.getElementById('preview-foto-mhs-dash').classList.add('block'); document.getElementById('preview-foto-mhs-dash').src = window.URL.createObjectURL(this.files[0])">
+                    </div>
+                </div>
+                <div class="mb-2">
+                    <label class="block text-gray-700 text-sm mb-1">Email</label>
+                    <input type="email" name="email" class="w-full border p-2 rounded" value="<?= htmlspecialchars($mhsData['email'] ?? '') ?>" required>
+                </div>
+                <div class="mb-2">
+                    <label class="block text-gray-700 text-sm mb-1">Tempat Lahir</label>
+                    <input type="text" name="tempat_lahir" class="w-full border p-2 rounded" value="<?= htmlspecialchars($mhsData['tempat_lahir'] ?? '') ?>" required>
+                </div>
+                <div class="mb-2">
+                    <label class="block text-gray-700 text-sm mb-1">Tanggal Lahir</label>
+                    <input type="date" name="tanggal_lahir" class="w-full border p-2 rounded" value="<?= htmlspecialchars($mhsData['tanggal_lahir'] ?? '') ?>" required>
+                </div>
+                <div class="mb-2">
+                    <label class="block text-gray-700 text-sm mb-1">Jenis Kelamin</label>
+                    <select name="jk" class="w-full border p-2 rounded" required>
+                        <option value="L" <?= $mhsData['jk']=='L'?'selected':'' ?>>Laki-laki</option>
+                        <option value="P" <?= $mhsData['jk']=='P'?'selected':'' ?>>Perempuan</option>
+                    </select>
+                </div>
+                <div class="mb-2">
+                    <label class="block text-gray-700 text-sm mb-1">Agama</label>
+                    <select name="agama" class="w-full border p-2 rounded" required>
+                        <?php 
+                        $agamaOpt = ['Islam', 'Kristen', 'Katolik', 'Hindu', 'Buddha', 'Konghucu', 'Lainnya'];
+                        foreach($agamaOpt as $ag) {
+                            $sel = ($mhsData['agama'] == $ag) ? 'selected' : '';
+                            echo "<option value=\"$ag\" $sel>$ag</option>";
+                        }
+                        ?>
+                    </select>
+                </div>
+                <div class="mb-2">
+                    <label class="block text-gray-700 text-sm mb-1">Telepon / No. HP</label>
+                    <input type="text" name="telepon" class="w-full border p-2 rounded" value="<?= htmlspecialchars($mhsData['telepon'] ?? '') ?>" required>
+                </div>
+                <div class="mb-2">
+                    <label class="block text-gray-700 text-sm mb-1">Password Baru (opsional)</label>
+                    <input type="password" name="password" class="w-full border p-2 rounded">
+                </div>
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm mb-1">Alamat Lengkap</label>
+                <textarea name="alamat" class="w-full border p-2 rounded" rows="2" required><?= htmlspecialchars($mhsData['alamat'] ?? '') ?></textarea>
+            </div>
+            
+            <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded transition duration-200">Simpan & Lanjutkan ke Dashboard</button>
+        </form>
+    </div>
+</div>
+
+<?php else: ?>
 <div class="p-6">
     <h1 class="text-2xl font-bold mb-4">Dashboard Mahasiswa</h1>
     
@@ -153,5 +251,7 @@ foreach ($dataIpsRaw as $row) {
         }
     });
 </script>
+<?php endif; ?>
+
 <?php endif; ?>
 <?php require_once "../layout/footer.php"; ?>

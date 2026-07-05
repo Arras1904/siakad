@@ -34,17 +34,17 @@ function requireRole(array $roles) {
         $currentPath = $_SERVER['REQUEST_URI'];
         
         if ($_SESSION['role'] === 'mahasiswa') {
-            if (strpos($currentPath, 'biodata.php') === false && 
+            if (strpos($currentPath, 'dashboard.php') === false && 
                 strpos($currentPath, 'proses_biodata.php') === false && 
                 strpos($currentPath, 'logout.php') === false) {
-                header("Location: " . BASE_URL . "mahasiswa/biodata.php");
+                header("Location: " . BASE_URL . "mahasiswa/dashboard.php");
                 exit();
             }
         } elseif ($_SESSION['role'] === 'dosen') {
-            if (strpos($currentPath, 'profil.php') === false && 
+            if (strpos($currentPath, 'dashboard.php') === false && 
                 strpos($currentPath, 'proses_profil.php') === false && 
                 strpos($currentPath, 'logout.php') === false) {
-                header("Location: " . BASE_URL . "dosen/profil.php");
+                header("Location: " . BASE_URL . "dosen/dashboard.php");
                 exit();
             }
         }

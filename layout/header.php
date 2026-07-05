@@ -39,6 +39,9 @@ if (!isset($pageTitle)) {
     <!-- ChartJS -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
     <!-- CSS -->
     <link rel="stylesheet" href="<?= BASE_URL ?>assets/css/style.css">
     <link rel="stylesheet" href="<?= BASE_URL ?>assets/css/dashboard.css">
@@ -46,6 +49,17 @@ if (!isset($pageTitle)) {
     <link rel="stylesheet" href="<?= BASE_URL ?>assets/css/form.css">
     <link rel="stylesheet" href="<?= BASE_URL ?>assets/css/responsive.css">
 
+    <style>
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        /* Hide scrollbar for IE, Edge and Firefox */
+        .no-scrollbar {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+    </style>
 </head>
 
 <body>

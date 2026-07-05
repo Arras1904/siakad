@@ -47,7 +47,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $t = $tugas ?? 0;
                 $ut = $uts ?? 0;
                 $ua = $uas ?? 0;
-                $na = ($t + $ut + $ua) / 3;
+                // Bobot: Tugas 20%, UTS 30%, UAS 50%
+                $na = ($t * 0.20) + ($ut * 0.30) + ($ua * 0.50);
                 $huruf = getHuruf($na);
 
                 // Fetch existing id_nilai or generate new

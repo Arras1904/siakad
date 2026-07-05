@@ -35,7 +35,7 @@ $totalMutu = 0;
 
 if ($filterPeriode) {
     $qNilai = $pdo->prepare("
-        SELECT m.kode_matkul, m.nama_matkul, m.sks, n.tugas, n.uts, n.uas, n.nilai_akhir, n.nilai_huruf, b.bobot, b.lulus
+        SELECT m.kode_matkul, m.nama_matkul, m.sks, n.tugas, n.uts, n.uas, n.nilai_akhir, n.nilai_huruf, b.bobot
         FROM nilai n
         JOIN peserta_kelas pk ON n.id_peserta_kelas = pk.id_peserta_kelas
         JOIN kelas_perkuliahan kp ON pk.id_kelas_perkuliahan = kp.id_kelas_perkuliahan
@@ -107,7 +107,7 @@ if ($filterPeriode) {
                         <td class="py-2 px-4 border-b text-center"><?= $nl['uts'] ?? '-' ?></td>
                         <td class="py-2 px-4 border-b text-center"><?= $nl['uas'] ?? '-' ?></td>
                         <td class="py-2 px-4 border-b text-center font-bold"><?= $nl['nilai_akhir'] !== null ? number_format($nl['nilai_akhir'], 2) : '-' ?></td>
-                        <td class="py-2 px-4 border-b text-center font-bold text-lg <?= $nl['lulus']==0 ? 'text-red-500' : 'text-green-600' ?>">
+                        <td class="py-2 px-4 border-b text-center font-bold text-lg <?= $nl['bobot']==0 ? 'text-red-500' : 'text-green-600' ?>">
                             <?= $nl['nilai_huruf'] ?? '-' ?>
                         </td>
                     </tr>
