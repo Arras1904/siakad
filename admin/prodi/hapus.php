@@ -7,11 +7,11 @@ require_once "../../config/koneksi.php";
 $id = $_GET['id'] ?? '';
 if ($id) {
     try {
-        $stmt = $pdo->prepare("DELETE FROM kelas_perkuliahan WHERE id_kelas_perkuliahan = ?");
+        $stmt = $pdo->prepare("DELETE FROM prodi WHERE id_prodi = ?");
         $stmt->execute([$id]);
-        $_SESSION['success'] = "Data Kelas Perkuliahan berhasil dihapus.";
+        $_SESSION['success'] = "Data prodi berhasil dihapus.";
     } catch (\PDOException $e) {
-        $_SESSION['error'] = "Gagal menghapus data.";
+        $_SESSION['error'] = "Gagal menghapus data (mungkin data sedang digunakan).";
     }
 }
 header("Location: index.php");

@@ -4,7 +4,7 @@ require_once "../../core/Guard.php";
 requireRole(['admin']);
 require_once "../../config/koneksi.php";
 
-$pageTitle = "Tambah Dosen";
+$pageTitle = "Tambah Kelas";
 require_once "../../layout/header.php";
 require_once "../../layout/sidebar.php";
 require_once "../../layout/navbar.php";
@@ -14,7 +14,7 @@ if (!isset($_SESSION['csrf_token'])) $_SESSION['csrf_token'] = bin2hex(random_by
 $prodi = $pdo->query("SELECT * FROM prodi ORDER BY nama_prodi ASC")->fetchAll();
 ?>
 <div class="p-6">
-    <h1 class="text-2xl font-bold mb-4">Tambah Dosen Baru</h1>
+    <h1 class="text-2xl font-bold mb-4">Tambah Kelas</h1>
     
     <?php if(isset($_SESSION['error'])): ?>
         <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
@@ -26,15 +26,7 @@ $prodi = $pdo->query("SELECT * FROM prodi ORDER BY nama_prodi ASC")->fetchAll();
         <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
         
         <div class="mb-4">
-            <label class="block text-gray-700 mb-2">Nama Lengkap</label>
-            <input type="text" name="nama_lengkap" class="w-full border p-2 rounded" required>
-        </div>
-        <div class="mb-4">
-            <label class="block text-gray-700 mb-2">NIP</label>
-            <input type="text" name="nip" class="w-full border p-2 rounded" required>
-        </div>
-        <div class="mb-4">
-            <label class="block text-gray-700 mb-2">Program Studi (Homebase)</label>
+            <label class="block text-gray-700 mb-2">Program Studi</label>
             <select name="id_prodi" class="w-full border p-2 rounded" required>
                 <option value="">-- Pilih Prodi --</option>
                 <?php foreach($prodi as $p): ?>
@@ -42,7 +34,10 @@ $prodi = $pdo->query("SELECT * FROM prodi ORDER BY nama_prodi ASC")->fetchAll();
                 <?php endforeach; ?>
             </select>
         </div>
-        <p class="text-sm text-gray-500 mb-4">Data lainnya akan diisi sendiri oleh dosen bersangkutan pada saat login pertama kali (menggunakan username: NIP, password: NIP).</p>
+        <div class="mb-4">
+            <label class="block text-gray-700 mb-2">Nama Kelas (Contoh: TI-A)</label>
+            <input type="text" name="nama_kelas" class="w-full border p-2 rounded" required>
+        </div>
         <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Simpan</button>
         <a href="index.php" class="ml-2 text-gray-600">Batal</a>
     </form>
