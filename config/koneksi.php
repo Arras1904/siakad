@@ -1,14 +1,20 @@
 <?php
+$host = 'localhost';
+$db   = 'siakad';
+$user = 'root';
+$pass = '';
+$charset = 'utf8mb4';
 
-$host = "localhost";
-$user = "root";
-$pass = "";
-$db   = "siakad";
+$dsn = "mysql:host=$host;dbname=$db;charset=$charset";
+$options = [
+    PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+    PDO::ATTR_EMULATE_PREPARES   => false,
+];
 
-$koneksi = mysqli_connect($host, $user, $pass, $db);
-
-if (!$koneksi) {
-    die("Koneksi Database Gagal : " . mysqli_connect_error());
+try {
+    $pdo = new PDO($dsn, $user, $pass, $options);
+} catch (\PDOException $e) {
+    throw new \PDOException($e->getMessage(), (int)$e->getCode());
 }
-
 ?>

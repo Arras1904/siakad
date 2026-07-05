@@ -1,18 +1,14 @@
 <?php
-session_start();
+require_once "../config/config.php";
+require_once "../core/Auth.php";
 
-// Hapus seluruh data session
-$_SESSION = array();
-
-// Hancurkan session
-session_destroy();
+logoutUser();
 
 // Hapus cache browser
 header("Cache-Control: no-cache, no-store, must-revalidate");
 header("Pragma: no-cache");
 header("Expires: 0");
 
-// Kembali ke halaman login
 header("Location: login.php");
 exit();
 ?>
