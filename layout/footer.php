@@ -44,7 +44,7 @@
      JAVASCRIPT
 ============================ -->
 
-<script src="<?= BASE_URL ?>assets/js/script.js"></script>
+<script src="<?= BASE_URL ?>assets/js/script.js?v=<?= time() ?>"></script>
 
 <script src="<?= BASE_URL ?>assets/js/dashboard.js"></script>
 

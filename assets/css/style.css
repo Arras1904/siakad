@@ -1413,6 +1413,11 @@ select.form-control{
    RESPONSIVE
 ========================================================== */
 
+/* Active states for Desktop */
+.sidebar.active{ left:-270px; }
+.main-content.active{ margin-left:0; width:100%; }
+.footer.active{ margin-left:0; }
+
 @media(max-width:1200px){
 
 .main-content{

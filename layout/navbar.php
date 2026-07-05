@@ -16,10 +16,8 @@ $foto = !empty($_SESSION['foto'])
     <!-- Kiri -->
     <div class="navbar-left">
 
-        <button class="menu-button" id="toggleSidebar">
-
+        <button class="menu-button" id="toggleSidebar" onclick="toggleSidebarAction(event)">
             <i class="fa-solid fa-bars"></i>
-
         </button>
 
         <div>
@@ -39,7 +37,7 @@ $foto = !empty($_SESSION['foto'])
     <!-- Kanan -->
     <div class="navbar-right">
 
-        <div class="navbar-info">
+        <div class="navbar-info hidden md:flex">
 
             <i class="fa-solid fa-calendar-days"></i>
 

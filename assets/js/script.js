@@ -5,25 +5,42 @@
 
 document.addEventListener("DOMContentLoaded", function () {
 
-    // ============================
-    // SIDEBAR TOGGLE
-    // ============================
-
-    const sidebar = document.querySelector(".sidebar");
-    const menuButton = document.getElementById("menuButton");
-
-    if (menuButton && sidebar) {
-
-        menuButton.addEventListener("click", function () {
-
-            sidebar.classList.toggle("active");
-
-        });
-
-    }
-
+    // Fitur lain yang butuh DOMContentLoaded bisa ditaruh di sini
 });
 
+// ============================
+// SIDEBAR TOGGLE (Global Function)
+// ============================
+function toggleSidebarAction(e) {
+    if (e) e.stopPropagation();
+    
+    const sidebar = document.querySelector(".sidebar");
+    const mainContent = document.querySelector(".main-content");
+    const footer = document.querySelector(".footer");
+    
+    if (sidebar) sidebar.classList.toggle("active");
+    if (mainContent) mainContent.classList.toggle("active");
+    if (footer) footer.classList.toggle("active");
+}
+
+// Tutup sidebar di luar klik (khusus mobile)
+document.addEventListener("click", function (e) {
+    if (window.innerWidth <= 1200) {
+        const sidebar = document.querySelector(".sidebar");
+        const menuButton = document.getElementById("toggleSidebar");
+        
+        if (sidebar && menuButton) {
+            if (!sidebar.contains(e.target) && !menuButton.contains(e.target)) {
+                const mainContent = document.querySelector(".main-content");
+                const footer = document.querySelector(".footer");
+                
+                sidebar.classList.remove("active");
+                if (mainContent) mainContent.classList.remove("active");
+                if (footer) footer.classList.remove("active");
+            }
+        }
+    }
+});
 
 /* ==========================================
    SHOW / HIDE PASSWORD
