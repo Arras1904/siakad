@@ -6,7 +6,7 @@ if (session_status() == PHP_SESSION_NONE) {
 require_once __DIR__ . "/../config/config.php";
 
 // Cek Login
-if (!isset($_SESSION['login'])) {
+if (!isset($_SESSION['user_id'])) {
     header("Location: " . BASE_URL . "auth/login.php");
     exit();
 }
